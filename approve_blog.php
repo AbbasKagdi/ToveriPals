@@ -12,7 +12,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if(!(isset($_SESSION['create'])) || !(isset($_SESSION['approve']))){
     if(!$_SESSION['shortcut']){
-	    header("Location: 404.php");
+	header("Location: 404.php");
         die("wrong entry!");
     }
 }
