@@ -11,7 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if(!(isset($_SESSION['create'])) || !(isset($_SESSION['approve']))){
-    if(!$_SESSION['shortcut']){
+    if(!isset($_SESSION['shortcut'])){
 	    header("Location: 404.php");
         die("wrong entry!");
     }
@@ -64,6 +64,8 @@ else if (in_array($_POST['id'], $log['pending'])) {
     // update log
     file_put_contents("static/blogs/log.json", json_encode($log), LOCK_EX);
 
+    // clearing shorcut
+    if(isset($_SESSION['shortcut'])){ unset($_SESSION['shortcut']); }
 	die("ok");
 }
 else{

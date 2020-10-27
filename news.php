@@ -5,13 +5,13 @@
     // reverse post order to fetch latest blogs first
     $log["posts"] = array_reverse($log["posts"]);
 
+    $limit = 9;
     if(isset($_GET['page'])){
         $page = is_numeric($_GET['page']) ? floor(abs($_GET['page'])) : 1;
-        $page = $page > $log['total'] ? 1: $page;
+        $page = (($page - 1) > $log['total']/$limit) ? 1: $page;
     }
     else{ $page = 1; }
 
-    $limit = 9;
     $start = ($page-1)>=0 ? $limit*($page-1) : 0;
     $stop = $start + $limit;
     $stop = min($stop, (int)$log['total']);

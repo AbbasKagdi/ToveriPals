@@ -8,7 +8,9 @@
         session_start();
     }
     if(!(isset($_SESSION['create'])) || !(isset($_SESSION['approve']))){
-        //if(!isset($_GET['user']) || !isset($_GET['id']) ||!isset($_GET['action'])){
+        if(!isset($_GET['user']) || !isset($_GET['id']) ||!isset($_GET['action'])){
+            banish();
+        }
             // shortcuts
             $short_id = $_GET['id'];
             $short_action = $_GET['action'];
@@ -81,15 +83,17 @@
         <td><a href="#" class="btn btn-danger disabled">Purge</a></td>
     </tr>
     <?php
+    $disabled = "";
+    $disabled = (isset($_SESSION['shortcut'])) ? "disabled" : "";
     for($i = 1; $i < $log['pending_total']; $i++){
         $id = $log['pending'][$i];
         echo "
         <tr>
             <td>TEMP-$id</td>
             <td><a href='feed.php?article=-$id' target='_blank' class='btn btn-info'>Review</a></td>
-            <td><button onclick='aprv($id)' class='btn btn-success'>Approve</button></form></td>
+            <td><button onclick='aprv($id)' class='btn btn-success' $disabled>Approve</button></form></td>
             <td><a href='static/blogs/$id.json' class='btn btn-primary' download>Download</a></td>
-            <td><button onclick='purge($id)' class='btn btn-danger'>Purge</button></td>
+            <td><button onclick='purge($id)' class='btn btn-danger' $disabled>Purge</button></td>
         </tr>
         ";
     }
@@ -167,7 +171,7 @@ if(isset($_SESSION['shortcut'])){
     if($short_action == "s"){
         echo "<script>console.log('debug');</script>";
     }
-    unset($_SESSION['shortcut']);
+    //unset($_SESSION['shortcut']);
 }
 ?>
 </center>

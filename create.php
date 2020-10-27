@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(!$_SESSION['create']){
+	if(!isset($_SESSION['create'])){
         header("Location: 404.php");
 		die("Not Allowed!");
 	}
@@ -26,6 +26,25 @@
 		textarea[id='blog'] { 
         	resize: none; 
       	}
+
+		/*    https://artisansweb.net/drag-drop-file-upload-using-javascript-php/  
+				drag and drop  */
+		#drop_file_zone {
+			background-color: #F0F0F0;
+			border: #999 5px dashed;
+			height: fit-content;
+			padding: 8px;
+			font-size: 18px;
+		}
+		#drag_upload_file {
+			margin:0 auto;
+		}
+		#drag_upload_file p {
+			text-align: center;
+		}
+		#drag_upload_file #image {
+			display: none;
+		}
 	</style>
 </head>
 <body class='scroll1 page-admin'>
@@ -83,15 +102,20 @@
 			</div>
 			<!-- Image -->
 			<div class="form-row">
-				<p>Upload thumbnail image</p>
+				<p>Upload background image (max 5MB)</p>
 			</div>
-			<div class="custom-file">
-				<div class="input-group-prepend">
-					<div class="input-group-text"><i class="text-dark fa fa-camera"></i></div>
+			<!-- Image File -->
+		  	<?php // code from https://artisansweb.net/drag-drop-file-upload-using-javascript-php/ ?>
+			<div class="mb-3" id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
+				<div id="drag_upload_file">
+					<p id="image-label">
+						<i class="fa fa-3x fa-upload text-secondary mt-3"></i>
+						<br>Drop file here<br>or
+					</p>
+					<input type="button" class="btn btn-sm border-secondary" value="Browse File" onclick="file_explorer();">
+					<input type="file" id="image" name="image" accept="image/x-png,image/gif,image/jpeg,image/svg" required>
 				</div>
-				<input type="file" class="form-control custom-file-input" id="image" name="image" accept="image/x-png,image/gif,image/jpeg,image/svg" required>
-				<label class="custom-file-label" id="image-label" for="image">16:9 (>5MB)</label>
-			</div>
+        	</div>
 			<!-- Badges -->
 			<div class="form-row">
 				<div>
@@ -142,16 +166,34 @@
 <!-- Footer -->
 <?php include_once "footer.php"; ?>
 <script>
+	// drag and drop
+	var img;
+	function upload_file(e) {
+		e.preventDefault();
+		var filename = e.dataTransfer.files[0];
+		img = filename;
+		file_upload(filename.name);
+		//filename = filename.name.replace(/C:\\fakepath\\/i, '');
+		//$('#image-label').html('<b>'+filename+'</b>');
+	}
+	
+	function file_explorer() {
+		document.getElementById('image').click();
+		document.getElementById('image').onchange = function() {
+			img = document.getElementById('image').files[0];
+			file_upload(img.name);
+		};
+	}
+
 	// caption change on image upload
-	$('#image').change(function() {
-		var filename = $('#image').val();
-		filename = filename.replace("C:\\fakepath\\", "");
+	function file_upload(filename) {
+		filename = filename.replace(/C:\\fakepath\\/i, '');
 		$('#image-label').html('<b>'+filename+'</b>');
-	});
+	}
+
 	// reset
-	$('#rst').click(function() {
-		$('#image-label').html('16:9 (>5MB)');
-	});
+	// $('#rst').click(function() { $('#image-label').html('16:9 (>5MB)'); });
+
 	// form submission for new blog
 	$(document).ready(function(){
 		$("#sub").click(function(){
@@ -161,7 +203,7 @@
 			var b = $("#blog").val();
 			var a = $("#color").val();
 			var p = $("#password").val();
-			var img = $('#image').prop('files')[0];
+			//var img = $('#image').prop('files')[0];
 			
 			// select checked checkboxes
 			var c = [];
@@ -176,11 +218,14 @@
 				alert('Please fill all form details');
 				return;
 			}
+			if(img.length == 0){
+				alert('Please upload an appropriate image');
+				return;
+			}
 		
 			// formdata to send file and data
 			var fd = new FormData();
-			var files = $("#image").get(0).files;
-			fd.append("file", files[0]);
+			fd.append("file", img);
 			
 			fd.append("h", h);
 			fd.append("s", s);
@@ -236,6 +281,7 @@
 		return false;
 		});
 	});
+
 	// navigate to moderator's page
     $('#mod').click(function () {
         var enter = prompt("Enter Password");
