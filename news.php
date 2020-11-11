@@ -183,8 +183,7 @@ $pages = ceil($log['total'] / $limit);
             </li>
         </ul>
     </nav>
-
-
+	
 <!-- Footer -->
 <?php include_once "footer.php"; ?>
 
