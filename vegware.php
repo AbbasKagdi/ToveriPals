@@ -44,6 +44,30 @@
 					</thead>
 					<tbody>
 						<tr>
+							<td>Compostible Burger Wraps</td>
+							<td>November 2020</td>
+							<td><a href="static/catalogs/vegware_burger.pdf" class="btn btn-primary btnc">Download</a></td>
+							<td class="d-none d-md-table-cell"><a class="pop"><abbr title="click here to scan code"><img src="static/catalogs/vegware_burger.png" alt="Vegware Burger Wraps qrcode" width="50"></abbr></a></td>
+						</tr>
+						<tr>
+							<td>Wooden Cutlery Kits</td>
+							<td>November 2020</td>
+							<td><a href="static/catalogs/vegware_cutlery.pdf" class="btn btn-primary btnc">Download</a></td>
+							<td class="d-none d-md-table-cell"><a class="pop"><abbr title="click here to scan code"><img src="static/catalogs/vegware_cutlery.png" alt="Vegware Wooden Cutlery Kits qrcode" width="50"></abbr></a></td>
+						</tr>
+						<tr>
+							<td>Wrapped Wooden Stirrir</td>
+							<td>November 2020</td>
+							<td><a href="static/catalogs/vegware_stir.pdf" class="btn btn-primary btnc">Download</a></td>
+							<td class="d-none d-md-table-cell"><a class="pop"><abbr title="click here to scan code"><img src="static/catalogs/vegware_stir.png" alt="Vegware Wooden Stirrir qrcode" width="50"></abbr></a></td>
+						</tr>
+						<tr>
+							<td>Health and Care</td>
+							<td>October 2020</td>
+							<td><a href="static/catalogs/vegware_health.pdf" class="btn btn-primary btnc">Download</a></td>
+							<td class="d-none d-md-table-cell"><a class="pop"><abbr title="click here to scan code"><img src="static/catalogs/vegware_health.png" alt="Vegware Health and Care qrcode" width="50"></abbr></a></td>
+						</tr>
+						<tr>
 							<td>Bon Appetit Bowls</td>
 							<td>October 2020</td>
 							<td><a href="static/catalogs/vegware_bowls.pdf" class="btn btn-primary btnc">Download</a></td>

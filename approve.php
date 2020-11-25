@@ -6,6 +6,7 @@
     // trespasser
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
+		session_regenerate_id();
     }
     if(!(isset($_SESSION['create'])) || !(isset($_SESSION['approve']))){
         if(!isset($_GET['user']) || !isset($_GET['id']) ||!isset($_GET['action'])){

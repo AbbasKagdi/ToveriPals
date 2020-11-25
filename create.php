@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	session_regenerate_id();
 	if(!isset($_SESSION['create'])){
         header("Location: 404.php");
 		die("Not Allowed!");
@@ -9,7 +10,7 @@
 <html lang="en">
   <head>
     <title>Create a blog | Toveri Pals</title>
-	<meta name="description" content="Our Products | Toveri Pals" />
+	<meta name="description" content="Admin Panel | Toveri Pals" />
 	<meta name="keywords" content="General Trading, Bussiness, Real Estate">
 	<!-- Load Headers-->
 	<?php include_once "headers.php"; ?>
@@ -47,12 +48,15 @@
 		}
 	</style>
 </head>
-<body class='scroll1 page-admin'>
+<body class='scroll1 page-news'>
 <center>
+
 <!-- Navbar -->
 <?php include_once "nav.php"; ?>
+
 <!-- front section -->
 <div><img id="banner" class="img-fluid w-100" src="img/banners/typewriter.jpg" /></div>
+
 <!-- intro text -->
 <div class="my-5 text-center" id="intro">
   <div class="container">
@@ -63,6 +67,7 @@
 	<small>Single press the submit button, and wait till the dailog box appears.</small>
   </div>
 </div>
+
 <!-- form -->
 <section>
 <!-- $file = fopen("test.txt","w+"); -->
@@ -151,7 +156,7 @@
 				<div class="input-group-prepend">
 					<div class="input-group-text"><i class="text-dark fa fa-lock"></i></div>
 				</div>
-				<input type="password" class="form-control" id="password" placeholder="Password" required  maxlength="15">
+				<input type="password" class="form-control" id="password" placeholder="Password" required  maxlength="15" autocomplete="off">
 			</div>
 			<!-- submit -->
 			<input type="button" value="Submit" id="sub" class="btn btn-primary">
@@ -192,7 +197,8 @@
 	}
 
 	// reset
-	// $('#rst').click(function() { $('#image-label').html('16:9 (>5MB)'); });
+	var def = "<i class='fa fa-3x fa-upload text-secondary mt-3'></i><br>Drop file here<br>or";
+	$('#rst').click(function() { $('#image-label').html(def); });
 
 	// form submission for new blog
 	$(document).ready(function(){

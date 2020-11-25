@@ -2,6 +2,7 @@
     // trespasser
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
+		session_regenerate_id();
 	}
     if(!(isset($_SESSION['create'])) || !(isset($_SESSION['approve']))){
         header("Location: 404.php");
